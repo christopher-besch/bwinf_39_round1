@@ -1,28 +1,34 @@
 #include <iostream>
 #include <fstream>
+#include <array>
+#include <string>
 
 int main()
 {
-    std::ios::pos_type size;
-    char* mem_block;
-
-    std::ifstream file("files/english.txt", std::ios::in|std::ios::ate);
-    if(file.is_open())
+    std::ifstream file("files/english.txt");
+    if (!file.is_open())
     {
-        size = file.tellg();
-        // + NULL termination
-        mem_block = new char[static_cast<int>(size) + 1];
-        file.seekg(0, std::ios::beg);
-        file.read(mem_block, size);
-        file.close();
-        mem_block[-1] = NULL;
-
-        std::cout << mem_block << std::endl;
-
-        delete[] mem_block;
-    }
-    else
         std::cout << "Unable to open file!" << std::endl;
+        return -1;
+    }
+
+    int words_amount = 0;
+    std::string line;
+    while (std::getline(file, line))
+        ++words_amount;
+
+    const char* words[words_amount];
+    = new const char* [words_amount];
+
+    file.seekg(0, std::ios::beg);
+    for(int line_idx = 0; line_idx != words_amount; line_idx++)
+    {
+        std::getline(file, line);
+        words[line_idx] = line.c_str();
+    }
+
+    for(int word_idx = 0; word_idx != words_amount; ++word_idx)
+        std::cout << words[word_idx] << std::endl;
 
     std::cin.get();
     return 0;
