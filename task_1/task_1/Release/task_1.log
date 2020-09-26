@@ -1,0 +1,10 @@
+﻿  Main.cpp
+C:\Users\Stromel\Data\BWINF\bwinf39\task_1\task_1\src\Main.cpp(43,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Stromel\Data\BWINF\bwinf39\task_1\task_1\src\Main.cpp(53,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Stromel\Data\BWINF\bwinf39\task_1\task_1\src\Main.cpp(61,33): warning C4018: '<': signed/unsigned mismatch
+  Generating code
+  1 of 204 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  task_1.vcxproj -> C:\Users\Stromel\Data\BWINF\bwinf39\task_1\Release\task_1.exe

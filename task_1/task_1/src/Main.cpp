@@ -38,18 +38,13 @@ int main()
 
     char* chars = new char[char_amount];
     // calculated indices
-    char** indices = new char*[word_lengths.size() + 1];
-    indices[-1] = nullptr;
-    char* last_length = chars;
+    char** indices = new char*[word_lengths.size()];
+    indices[0] = chars;
     for (int idx = 1; idx < word_lengths.size(); idx++)
-    {
-        indices[idx] = last_length + word_lengths[idx - 1] * (idx - 1);
-        last_length = indices[idx];
-        // std::cout << reinterpret_cast<int>(indices[idx]) << std::endl;
-    }
+        indices[idx] = indices[idx - 1] + word_lengths[idx - 1] * (idx - 1);
 
     char** current_indices = new char*[word_lengths.size()];
-    std::copy(indices, indices + word_lengths.size() + 1, current_indices);
+    std::copy(indices, indices + word_lengths.size(), current_indices);
 
     // start reading from beginning again
     file.open(FILE);
@@ -57,22 +52,22 @@ int main()
     {
         for (int idx = 0; idx < line.length(); idx++)
             *(current_indices[line.length()] + idx) = line[idx];
-        // print_char_array(current_indices[line.length()], current_indices[line.length()] + line.length());
         current_indices[line.length()] += line.length();
     }
     file.close();
+    delete[] current_indices;
 
     // print words
-    for (int length = 0; length < word_lengths.size(); length++)
+    for (int length = 1; length < word_lengths.size(); length++)
     {
-        for (char* pointer = indices[length]; pointer < indices[length + 1]; pointer += length)
-        {
-            // std::cout << reinterpret_cast<int>(pointer);
+        char* start = indices[length];
+        char* end = indices[length] + word_lengths[length] * length;
+        for (char* pointer = start; pointer < end; pointer += length)
             print_char_array(pointer, pointer + length);
-        }
     }
 
-    std::cout << chars << std::endl;
+    delete[] chars;
+    delete[] indices;
 
     std::cin.get();
     return 0;
