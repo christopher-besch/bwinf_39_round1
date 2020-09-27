@@ -13,7 +13,7 @@ void print_char_array(char* start, char* end)
     std::cout << std::endl;
 }
 
-int main()
+int mainl()
 {
     std::ifstream file(FILE);
     if (!file.is_open())
@@ -73,4 +73,12 @@ int main()
     return 0;
 }
 
-// test
+int main()
+{
+    std::ifstream file(FILE);
+    if (!file.is_open())
+    {
+        std::cout << "Unable to open file!" << std::endl;
+        return -1;
+    }
+}
