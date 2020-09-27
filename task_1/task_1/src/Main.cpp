@@ -75,10 +75,16 @@ int mainl()
 
 int main()
 {
-    std::ifstream file(FILE);
+    std::ifstream file("beispieldaten/raetsel0.txt");
     if (!file.is_open())
     {
         std::cout << "Unable to open file!" << std::endl;
         return -1;
     }
+    std::string line;
+    while (std::getline(file, line))
+    {
+        std::cout << line << std::endl;
+    }
+    file.close();
 }
