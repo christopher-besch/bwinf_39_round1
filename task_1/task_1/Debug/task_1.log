@@ -1,1 +1,5 @@
-﻿  task_1.vcxproj -> C:\Users\pasca\bwinf39\task_1\Debug\task_1.exe
+﻿  Main.cpp
+C:\Users\Stromel\Data\BWINF\bwinf39\task_1\task_1\src\Main.cpp(43,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Stromel\Data\BWINF\bwinf39\task_1\task_1\src\Main.cpp(53,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Stromel\Data\BWINF\bwinf39\task_1\task_1\src\Main.cpp(61,33): warning C4018: '<': signed/unsigned mismatch
+  task_1.vcxproj -> C:\Users\Stromel\Data\BWINF\bwinf39\task_1\Debug\task_1.exe
