@@ -26,13 +26,10 @@ def read_skill_levels(Filepath)-> list[int]:
     return skill_levels
 
 def play_RNG(player1: int,player2: int,skill_levels: list[int])-> int:
-    skill_level1=skill_levels.get(player1)
-    skill_level2=skill_levels.get(player2)
-    murmurs = [skill_level1+skill_level2]
-    for murmur in murmurs:
-        murmurs.append(random.randint(1,2))
-    winning_murmur = murmurs.get(random.randint(0,len(murmurs)))
-    if(winning_murmur==1):
+    skill_level1=skill_levels[player1]
+    skill_level2=skill_levels[player2]
+    random_murmur=random.randint(0,skill_level1+skill_level2)
+    if(random_murmur<skill_level1):
         return player1
     else:
         return player2
