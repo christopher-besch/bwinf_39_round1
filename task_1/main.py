@@ -125,7 +125,7 @@ def replace_incomplete_words(words, word_bank):
 
 
 def main():
-    text, word_bank = load_file("beispieldaten/my_raetsel1.txt")
+    text, word_bank = load_file(input("Enter filepath: "))
     words, non_words = cut_words(text)
     words = replace_incomplete_words(words, word_bank)
 

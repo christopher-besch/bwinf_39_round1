@@ -99,7 +99,7 @@ Diese Wörter müssen mithilfe von Ersatzwörtern aus der Wörterbank ersetzt we
 Ein Ersatzwort kann ein Wort ersetzten, wenn
 \begin{enumerate}
     \item die Länge beider Wörter gleich ist und
-    \item jeder Buchstabe aus dem Ersatzwort mit dem gegenüberliegenden Buchstaben, der Buchstabe aus dem Wort an gleicher Stelle, übereinstimmt, oder der gegenüberliegende Buchstabe eine freie Stelle (\glqq \_\grqq{}) ist.
+    \item jeder Buchstabe aus dem Ersatzwort mit dem gegenüberliegenden Buchstaben, der Buchstabe an gleicher Stelle aus dem Wort, übereinstimmt, oder der gegenüberliegende Buchstabe eine freie Stelle (\glqq \_\grqq{}) ist.
     Eine freie Stelle stimmt quasi mit jedem Buchstaben überein (=Joker).
 \end{enumerate}
 Wenn ein Ersatzwort verwendet wurde, kann es nicht erneut für ein folgendes Wort benutzt werden.
@@ -121,14 +121,14 @@ Die Nicht-Wörter vor den Wörtern, nach den Wörtern und zwischen den Wörtern 
 In einer while-Schleife wird in dem Text nach dem ersten Wort mithilfe einer Regular Expression gesucht.
 Nach jedem Treffer wird der Text gekürzt, sodass das nächste Wort gefunden werden kann.
 
-Nun wird mit der rekursiven Funktion replace\_incomplete\_words eine Lösung gesucht, sie nimmt einen Text und eine Wörterbank entgegen.
+Nun wird mit der rekursiven Funktion \textbf{replace\_incomplete\_words} eine Lösung gesucht, sie nimmt einen Text und eine Wörterbank entgegen.
 
 Bei jeder Ausführung dieser Funktion werden alle möglichen Ersatzwörter für das erste Wort im Text gesucht.
 Für jedes mögliche Ersatzwort wird die Funktion erneut aufgerufen, hier wird die Rekursion deutlich.
 Dieser Ausführung wird allerdings nicht der ganze Text und die ganze Wörterbank gegeben, das erste Wort wird aus dem Text und das verwendete Ersatzwort aus der Wörterbank weggelassen.
 
 Wenn der Funktion ein leerer Text, ein Text ohne Wörter, gegeben wird, wird der Rekursionsanker getroffen, eine Lösung wurde gefunden.
-Da aus der Aufgabenstellung hervorgeht, dass es immer nur eine Lösung geben kann, wird, wenn die erste funktionierende Möglichkeit gefunden wurde, die Suche abgebrochen.
+Da aus der Aufgabenstellung hervorgeht, dass es immer nur eine Lösung geben kann, wird die Suche abgebrochen, wenn die erste funktionierende Möglichkeit gefunden wurde.
 Die Funktion gibt den Text mit allen Ersatzwörtern in korrekter Reihenfolge zurück.
 
 Zum Schluss wird der finale Text mit allen Nicht-Wörtern ausgegeben.
@@ -136,34 +136,85 @@ Zum Schluss wird der finale Text mit allen Nicht-Wörtern ausgegeben.
 \section{Beispiele}
 % Genügend Beispiele einbinden! Die Beispiele von der BwInf-Webseite sollten hier diskutiert werden, aber auch eigene Beispiele sind sehr gut – besonders wenn sie Spezialfälle abdecken. Aber bitte nicht 30 Seiten Programmausgabe hier einfügen!
 
+Nun wird das Programm mit allen Beispieldateien ausgeführt.
+
+\paragraph{raetsel0.txt}
+Es wird das Ergebnis \glqq oh je, was für eine arbeit!\grqq{} ausgegeben.
+
+Die Wörter wurden korrekt ersetzt und unter Verwendung der Nicht-Wörtern zu einem sinnvollem Satz zusammengefügt.
+
+\paragraph{raetsel1.txt}
+Das Ergebnis ist \glqq Am Anfang wurde das Universum erschaffen.
+Das machte viele Leute sehr wütend und wurde allenthalben als Schritt in die falsche Richtung angesehen.\grqq{}
+
+Hier erkennt man, dass die Rekursion funktioniert, da das dritte Wort im Originaltext, \glqq \_\_\_\_e\grqq{}, durch \glqq Leute\grqq{} ersetzbar ist, allerdings muss \glqq Leute\grqq{} für das zehnte Wort, \glqq \_\_u\_\_\grqq{} verwendet werden.
+
+\paragraph{raetsel2.txt}
+\glqq Als Gregor Samsa eines Morgens aus unruhigen Träumen erwachte, fand er sich in seinem Bett zu einem ungeheueren Ungeziefer verwandelt.\grqq{}
+
+Hier erlangt man keine neuen Erkenntnisse über das Programm.
+
+\paragraph{raetsel3.txt}
+\glqq Informatik ist die Wissenschaft von der systematischen Darstellung, Speicherung, Verarbeitung und Übertragung von Informationen, besonders der automatischen Verarbeitung mit Digitalrechnern.\grqq{}
+
+\paragraph{raetsel4.txt}
+\glqq Opa Jürgen blättert in einer Zeitschrift aus der Apotheke und findet ein Rätsel. Es ist eine Liste von Wörtern gegeben, die in die richtige Reihenfolge gebracht werden sollen, so dass sie eine lustige Geschichte ergeben. Leerzeichen und Satzzeichen sowie einige Buchstaben sind schon vorgegeben.\grqq{}
+
+\paragraph{Eigenes Beispiel 1}
+Die Beispieldatei sieht wie folgt aus:
+
+\begin{itemize}
+    \item[] !!!Das ...,,,,,ist,,,!!!!...! ein .,.,..,.tolles \_\_i\_\_iel!!!
+    \item[] Beispiel
+\end{itemize}
+
+Mit dem Ergebnis \glqq !!!Das ...,,,,,ist,,,!!!!...! ein .,.,..,.tolles Beispiel!!!\grqq{}
+
+Hier wird deutlich, dass das Programm kein Problem mit Wörtern ohne Lücken aufweist und ebenfalls Nicht-Wörter ganz am Anfang akzeptiert. Zudem wird deutlich, dass die Länge der Nicht-Wörter und deren Bestandteile (solange sie keine Buchstaben oder \glqq \_\grqq{} enthalten) irrelevant sind.
+
+\paragraph{Eigenes Beispiel 2}
+Dieses Beispiel ist \textbf{raetsel4.txt} mit einer kleinen Abänderung, ein Wort aus der Wörterbank fehlt, es kann also keine Lösung geben. Dies gibt das Programm korrekt aus, \glqq No solution could be found!\grqq{}.
+
+\paragraph{Eigenes Beispiel 3}
+Genau wie das zweite eigene Beispiel ist dieses eine Kopie von \textbf{raetsel4.txt} mit einer kleinen Abänderung, ein Wort aus der Wörterbank wurde abgeändert, \glqq gegeben\grqq{} wurde durch \glqq aaaaben\grqq{} ausgetauscht, es kann also keine Lösung geben. Dies gibt das Programm ebenfalls korrekt aus, \glqq No solution could be found!\grqq{}.
+
 \section{Quellcode}
 % Unwichtige Teile des Programms sollen hier nicht abgedruckt werden. Dieser Teil sollte nicht mehr als 2–3 Seiten umfassen, maximal 10.
 
+Es folgt der wichtigste Teil des Programmes, die rekursive Funktion, mit gekürzten Kommentaren. Das komplette Programm mit ausführlichen Kommentaren findet sich in \textbf{main.py}.
 \begin{lstlisting}
-def load_file(filepath):
-    with open(filepath, "r", encoding="utf-8") as file:
-        # first line is text
-        text = file.readline().strip()
-        # second line is word bank
-        word_bank = file.readline().strip().split(" ")
-    return text, word_bank
-\end{lstlisting}
+def replace_incomplete_words(words, word_bank):
+    # there are no words left to be replaced -> break recursion
+    if len(words) == 0:
+        return []
 
-\begin{lstlisting}
-def does_match(word, possible_replacement):
-    """
-    is possible_replacement able to replace incomplete_word?
-    """
-    # does the length match?
-    if len(word) != len(possible_replacement):
-        return False
-    # check every character
-    for char_word, char_replacement in zip(word, possible_replacement):
-        # when the current char in the replacement word is not unknown (isn't "_"),
-        # it has to match with the current char of the word otherwise there is no chance of replaceability
-        if char_word != "_" and char_word.upper() != char_replacement.upper():
-            return False
-    return True
+    result = []
+
+    # no blanks in the current word -> word is already complete
+    if "_" not in words[0]:
+        following_replacements = replace_incomplete_words(words[1:], word_bank)
+        if following_replacements is not None:
+            result = [words[0]] + following_replacements
+            hit = True
+        else:
+            hit = False
+    else:
+        replacement_indices = find_replacements(words[0], word_bank)
+
+        # test every replacement
+        hit = False
+        for replacement_idx in replacement_indices:
+            current_word_bank = word_bank.copy()
+            replacement = current_word_bank.pop(replacement_idx)
+            following_replacements = replace_incomplete_words(words[1:], current_word_bank)
+            if following_replacements is not None:
+                result = [replacement] + following_replacements
+                hit = True
+                break
+    if hit:
+        return result
+    else:
+        return None
 \end{lstlisting}
 
 \end{document}
