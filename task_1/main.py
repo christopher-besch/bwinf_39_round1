@@ -86,18 +86,23 @@ def replace_incomplete_words(words, word_bank):
     if len(words) == 0:
         return []
 
+    # result words
+    result = []
+
     # no blanks in the current word -> word is already complete
     if "_" not in words[0]:
-        # save the word itself, not a replacement and run this function without the first word and the same word bank
-        result = [words[0]] + replace_incomplete_words(words[1:], word_bank)
-        # when the result is None, no solution can be found
-        hit = result is not None
+        following_replacements = replace_incomplete_words(words[1:], word_bank)
+        # when a solution (for every following word) can be found
+        if following_replacements is not None:
+            # save the word itself, and the following replacements
+            result = [words[0]] + following_replacements
+            hit = True
+        else:
+            hit = False
     else:
         # find replacements for the first word
         replacement_indices = find_replacements(words[0], word_bank)
 
-        # result words
-        result = []
         # True when at least one of the replacements doesn't produce any problems with the following words
         hit = False
         for replacement_idx in replacement_indices:
@@ -120,13 +125,16 @@ def replace_incomplete_words(words, word_bank):
 
 
 def main():
-    text, word_bank = load_file("beispieldaten/raetsel4.txt")
+    text, word_bank = load_file("beispieldaten/my_raetsel1.txt")
     words, non_words = cut_words(text)
     words = replace_incomplete_words(words, word_bank)
 
-    # print result, one word always comes before a separator
-    for word, separator in zip(words, non_words):
-        print(word, separator, sep="", end="")
+    if words is None:
+        print("No solution could be found!")
+    else:
+        # print result, one word always comes before a separator
+        for word, separator in zip(words, non_words):
+            print(word, separator, sep="", end="")
 
 
 if __name__ == "__main__":
