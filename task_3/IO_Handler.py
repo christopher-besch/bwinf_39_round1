@@ -1,6 +1,7 @@
+from typing import List
 
 
-def read_skill_levels(Filepath)-> list[int]:
+def read_skill_levels(Filepath)-> List[int]:
     with open(Filepath,"r")as data :
         skill_levels=[]
         for skill_level in data:

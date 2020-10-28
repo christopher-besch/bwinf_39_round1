@@ -1,8 +1,9 @@
 import unittest
-from RNG_Simulation import play_RNG
+from RNG_Simulation import play_RNG,play_RNG_5
 
 class Test_play_RNG(unittest.TestCase):
-    def test_2(self):
+    #testet Zufälligkeit der Operation random
+    def test_1(self):
         players=[0,1]
         skill_levels=[2,6]
         n=1000
@@ -18,6 +19,5 @@ class Test_play_RNG(unittest.TestCase):
                 count_wins_player2+=1
         self.assertAlmostEqual(count_wins_player1/n,average_player1,1)
         self.assertAlmostEqual(count_wins_player2/n,average_player2,1)
-
 
 

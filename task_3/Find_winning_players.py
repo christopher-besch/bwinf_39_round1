@@ -4,8 +4,9 @@ import itertools
 import numpy as np
 from RNG_Simulation import play_RNG
 
-def find_winning_player_Liga(players: List[int],skill_levels:List[int],play_game)->int:
-    ranking= [0]*len(players)
+def find_winning_player_Liga(skill_levels:List[int],play_game)->int:
+    players = list(range(len(skill_levels)))
+    ranking= [0]*len(skill_levels)
     for first_player,secound_player in itertools.combinations(players,2):
         winning_player= play_game(first_player,secound_player,skill_levels)
         ranking[winning_player]=ranking[winning_player]+1
@@ -17,6 +18,7 @@ def find_winning_player_KO(start_player:int, end_player:int, skill_levels, expec
     #Play_game muss first_player, secound_player und skillevels als Argumente haben
     #Startplayer und Endplayer definieren ein Intervall
     #Startplayer ist das erste Element von links, Endplayer ist das Element ein weiter rechts als das letzte
+
     if(start_player==end_player-1):
         return start_player
     middle_player= int((start_player+end_player)/2)
