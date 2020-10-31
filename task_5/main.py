@@ -87,16 +87,17 @@ def assign_packages(selection, wish_id, disallowed_packages):
 def resolve_after_assignment(selection, package_number, highest_wish_id):
     """
     recursive function
+    see if that assignment resolved a problem with a more important wish
     """
-    # see if that assignment resolved a problem with a more important wish
-    current_package_number = package_number
     # go through all more important wishes than the current one
     for current_wish_id in reversed(range(highest_wish_id)):
-        unassigned_wisher_numbers = get_unassigned_wishers(selection, current_package_number, current_wish_id)
+        unassigned_wisher_numbers = get_unassigned_wishers(selection, package_number, current_wish_id - 1)
         if len(unassigned_wisher_numbers) != 1:
             break
         selection.assign(unassigned_wisher_numbers[0], package_number)
-        resolve_after_assignment(selection, )
+        # todo: get wanted packages
+        for package in selection.students[unassigned_wisher_numbers[0]].wishes:
+            resolve_after_assignment(selection, package.number, highest_wish_id - 1)
 
 
 def get_unassigned_wishers(selection, package_number, wish_id):
