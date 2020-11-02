@@ -59,16 +59,22 @@ def load_students_and_packages(lines):
     # key: student number, value: Student instance
     students = {}
     for student_idx, line in enumerate(lines):
+        """
+        fill students
+        """
         # split line into words
         wishes = tuple(int(package_number) for package_number in re.split(r"[\W]+", line))
         # create Student instance and add to dict
         student = Student(student_idx + 1, wishes)
         students[student.number] = student
+        """
+        fill packages
+        """
         # go through every wished package
         for wish_idx, package_number in enumerate(student.wishes):
             # append student number to the wished-by-list
             packages[package_number].students[wish_idx].append(student.number)
-    return students, packages
+    return Selection(students, packages)
 
 
 def assign_packages(selection, wish_id, disallowed_packages):
@@ -113,8 +119,7 @@ def get_unassigned_wishers(selection, package_number, wish_id):
 
 def main():
     lines = load_file("beispieldaten/wichteln1.txt")
-    students, packages = load_students_and_packages(lines)
-    selection = Selection(students, packages)
+    selection = load_students_and_packages(lines)
     assign_packages(selection, 0, [])
     print(selection)
     pass
