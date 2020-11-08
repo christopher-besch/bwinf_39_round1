@@ -35,6 +35,12 @@ class Selection:
         return f"{len(self.students)} wishers with {self.amount_wishes} wishes each; " \
                f"{len(self.assigned_students)} wishers already have a package assigned to them"
 
+    def get_unassigned_wishers(self, package_number, wish_id):
+        # get Package object
+        package = self.packages[package_number]
+        # get all students having this package as their wish (according to wish_id) that aren't assigned
+        return [wisher for wisher in package.wishers[wish_id] if wisher not in self.assigned_students.keys()]
+
     def assign(self, student_number, package_number):
         """
         assign student to package
@@ -51,9 +57,11 @@ class Selection:
         """
         # get package
         package = self.packages[package_number]
+        # get unassigned wishers
+        unassigned_wishers = self.get_unassigned_wishers(package_number, wish_id)
         # when only a single student wants this package, they get it
-        if len(package.wishers[wish_id]) == 1:
-            this_student_number = package.wishers[wish_id][0]
+        if len(unassigned_wishers) == 1:
+            this_student_number = unassigned_wishers[0]
             # assign this student to the wanted package if they aren't assigned yet
             if this_student_number not in self.assigned_students.keys():
                 self.assign(this_student_number, package_number)
@@ -66,7 +74,6 @@ class Selection:
             return True
         return False
 
-    # todo: check
     def resolve_after_assignment(self, student_number, wish_id):
         """
         recursive function (calling assign_package_if_possible)
@@ -93,17 +100,18 @@ class Selection:
         """
         # numbers of all packages wanted by multiple students
         highly_wanted_package = []
-        for package in self.packages.values():
+        for package_number in self.packages.keys():
             # don't try to assign this package if it is disallowed or already assigned
-            if package.number in disallowed_packages or package.number in self.assigned_students.values():
+            # todo: unclean
+            if package_number in disallowed_packages or package_number in self.assigned_students.values():
                 continue
             # assign if possible
-            wanted_by_multiple = self.assign_package_if_possible(package.number, wish_id)
+            wanted_by_multiple = self.assign_package_if_possible(package_number, wish_id)
             if wanted_by_multiple:
-                highly_wanted_package.append(package.number)
+                highly_wanted_package.append(package_number)
         return highly_wanted_package
 
-    def assign_all(self):
+    def assign_all_cleanly(self):
         """
         try to assign all packages
         """
@@ -113,6 +121,35 @@ class Selection:
             # assign everything possible for this wish_id
             # and try to resolve as many problems in more important wishes as possible
             highly_wanted_packages += self.assign_packages(wish_id, highly_wanted_packages)
+
+    def assign_all_uncleanly(self):
+        """
+        go through all wishes and just assign the first student with their wished package
+        """
+        for wish_id in range(self.amount_wishes):
+            for student_number in self.students.keys():
+                # todo: unclean
+                if student_number in self.assigned_students.keys():
+                    continue
+                wished_package = self.students[student_number].wishes[wish_id]
+                # just assign if the package is not assigned yet
+                if wished_package not in self.assigned_students.values():
+                    self.assign(student_number, wished_package)
+
+    def assign_all_dirtily(self):
+        """
+        go through all unassigned students and unassigned packages and just assign with noo regard to the wishes
+        """
+        # get all unassigned packages
+        unassigned_package_numbers = [package_number for package_number in self.packages.keys()
+                                      if package_number not in self.assigned_students.values()]
+        for wish_id in range(self.amount_wishes):
+            for student_number in self.students.keys():
+                # todo: unclean
+                if student_number in self.assigned_students.keys():
+                    continue
+                # just take and delete the last unassigned package and assign it
+                self.assign(student_number, unassigned_package_numbers.pop())
 
 
 def load_file(filepath):
@@ -151,10 +188,25 @@ def load_students_and_packages(lines):
 
 
 def main():
+    # load students and packages form file
     lines = load_file("beispieldaten/wichteln7.txt")
     selection = load_students_and_packages(lines)
-    selection.assign_all()
-    print(selection)
+
+    # assign all packages and students
+    selection.assign_all_cleanly()
+    selection.assign_all_uncleanly()
+    selection.assign_all_dirtily()
+
+    # print results
+    print("student number, [wishes], assigned package")
+    for student_number in selection.students:
+        # convert this student's wishes into a usable string
+        wishes = [str(wish) for wish in selection.students[student_number].wishes]
+        wishes_string = "\t".join(wishes)
+        # get the package that got assigned to this student
+        assigned_package = selection.assigned_students[student_number]
+
+        print(f"{student_number}\t\t{wishes_string}\t\t{assigned_package}")
 
 
 if __name__ == "__main__":
