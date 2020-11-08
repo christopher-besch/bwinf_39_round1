@@ -27,32 +27,92 @@ class Selection:
         self.students = students
         # key: package number, value: Package instance
         self.packages = packages
-        # todo: this is fucked up!
         # key: package number, value: student number
         self.assigned_students = {}
+        self.amount_wishes = len(self.students[1].wishes)
 
     def __repr__(self):
-        amount_wishes = len(self.students[1].wishes)
-        return f"{len(self.students)} wishers with {amount_wishes} wishes each; " \
+        return f"{len(self.students)} wishers with {self.amount_wishes} wishes each; " \
                f"{len(self.assigned_students)} wishers already have a package assigned to them"
 
-    # assign student to package
-    def assign(self, package_number, student_number):
-        if package_number in self.assigned_students.keys() or student_number in self.assigned_students.values():
+    def assign(self, student_number, package_number):
+        """
+        assign student to package
+        """
+        if student_number in self.assigned_students.keys() or package_number in self.assigned_students.values():
             raise ValueError("Trying to assign an already assigned student or an already assigned package!")
-        self.assigned_students[package_number] = student_number
+        self.assigned_students[student_number] = package_number
+
+    def assign_package_if_possible(self, package_number, wish_id):
+        """
+        recursive function (calling resolve_after_assignment)
+        see if this package is only wanted by one person (according to wish_id)
+        and then assign it
+        """
+        # get package
+        package = self.packages[package_number]
+        # when only a single student wants this package, they get it
+        if len(package.wishers[wish_id]) == 1:
+            this_student_number = package.wishers[wish_id][0]
+            # assign this student to the wanted package if they aren't assigned yet
+            if this_student_number not in self.assigned_students.keys():
+                self.assign(this_student_number, package_number)
+
+                # see if that assignment resolved a problem with a more important wish
+                # <- one student less to find a package again
+                self.resolve_after_assignment(this_student_number, wish_id - 1)
+        # when this package is wanted by multiple people
+        elif len(package.wishers[wish_id]) > 1:
+            return True
+        return False
 
     # todo: check
-    def get_unassigned_wishers(self, package_number, wish_id):
+    def resolve_after_assignment(self, student_number, wish_id):
         """
-        get every unassigned student having this package as their wish (according to wish_id)
+        recursive function (calling assign_package_if_possible)
+        see if that assignment resolved a problem with a more important wish
+        go through all more important wishes than the current one
         """
-        # get all wishers of this package
-        wishers = self.packages[package_number].wishers[wish_id]
-        # get their number and and remove every assigned student
-        unassigned_wisher_numbers = [wisher.number for wisher in wishers if
-                                    wisher.number not in self.assigned_students.values()]
-        return unassigned_wisher_numbers
+        # when this wish doesn't exists
+        if wish_id < 0:
+            return
+
+        # now this package has one student less wanting it
+        package_number = self.students[student_number].wishes[wish_id]
+        # when this package is not assigned yet
+        if package_number not in self.assigned_students.values():
+            # see if it can be assigned -> resolve even more problems if possible
+            self.assign_package_if_possible(package_number, wish_id)
+        # do the same with the next more important wish
+        self.resolve_after_assignment(package_number, wish_id - 1)
+
+    def assign_packages(self, wish_id, disallowed_packages):
+        """
+        assign all packages that are wanted by only one student (according to wish_id)
+        and check if that assignment solved a problem with a more important wish
+        """
+        # numbers of all packages wanted by multiple students
+        highly_wanted_package = []
+        for package in self.packages.values():
+            # don't try to assign this package if it is disallowed or already assigned
+            if package.number in disallowed_packages or package.number in self.assigned_students.values():
+                continue
+            # assign if possible
+            wanted_by_multiple = self.assign_package_if_possible(package.number, wish_id)
+            if wanted_by_multiple:
+                highly_wanted_package.append(package.number)
+        return highly_wanted_package
+
+    def assign_all(self):
+        """
+        try to assign all packages
+        """
+        # these packages are wanted so much that less relevant wishes can't be used to assign it
+        highly_wanted_packages = []
+        for wish_id in range(self.amount_wishes):
+            # assign everything possible for this wish_id
+            # and try to resolve as many problems in more important wishes as possible
+            highly_wanted_packages += self.assign_packages(wish_id, highly_wanted_packages)
 
 
 def load_file(filepath):
@@ -90,45 +150,11 @@ def load_students_and_packages(lines):
     return Selection(students, packages)
 
 
-def assign_packages(selection, wish_id, disallowed_packages):
-    for package in selection.packages.values():
-        # don't try to assign this package if it is disallowed or already assigned
-        if package.number in disallowed_packages or package.number in selection.assigned_students:
-            continue
-        # when only a single student wants this package, they get it
-        if len(package.wishers[wish_id]) == 1:
-            # assign wanted package to this user
-            selection.assign(package.number, package.wishers[wish_id][0])
-
-            # see if that assignment resolved a problem with a more important wish
-            resolve_after_assignment(selection, package.number, wish_id - 1)
-
-
-# todo: fix
-def resolve_after_assignment(selection, package_number, wish_id):
-    """
-    recursive function
-    see if that assignment resolved a problem with a more important wish
-    go through all more important wishes than the current one
-    """
-    if wish_id == 0:
-        return
-
-    unassigned_wisher_numbers = get_unassigned_wishers(selection, package_number, wish_id)
-    if len(unassigned_wisher_numbers) != 1:
-        break
-    selection.assign(unassigned_wisher_numbers[0], package_number)
-    # todo: get wanted packages
-    for package in selection.wishers[unassigned_wisher_numbers[0]].wishes:
-        resolve_after_assignment(selection, package.number, highest_wish_id - 1)
-
-
 def main():
-    lines = load_file("beispieldaten/wichteln1.txt")
+    lines = load_file("beispieldaten/wichteln7.txt")
     selection = load_students_and_packages(lines)
-    assign_packages(selection, 0, [])
+    selection.assign_all()
     print(selection)
-    pass
 
 
 if __name__ == "__main__":
