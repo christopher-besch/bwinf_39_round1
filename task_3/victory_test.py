@@ -1,6 +1,6 @@
 from typing import List
-from Find_winning_players import find_winning_player_KO, find_winning_player_liga
-from RNG_Simulation import play_RNG, play_RNG_5
+from find_winning_players import find_winning_player_KO, find_winning_player_liga
+from rng_simulation import play_RNG, play_RNG_5
 
 
 def does_player_win(game_name: str, skill_levels: List[int]) -> bool:

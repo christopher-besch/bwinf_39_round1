@@ -1,4 +1,4 @@
-from Find_winning_players import find_winning_player_liga,find_winning_player_KO
+from find_winning_players import find_winning_player_liga,find_winning_player_KO
 import unittest
 
 

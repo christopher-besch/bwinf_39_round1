@@ -1,7 +1,7 @@
 import random
-from IO_Handler import read_skill_levels
-from Find_winning_players import find_winning_player_liga, find_winning_player_KO
-from RNG_Simulation import play_RNG_5, play_RNG
+from io_handler import read_skill_levels
+from find_winning_players import find_winning_player_liga, find_winning_player_KO
+from rng_simulation import play_RNG_5, play_RNG
 from victory_test import does_player_win
 import sys
 

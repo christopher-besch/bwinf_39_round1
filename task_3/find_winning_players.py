@@ -2,17 +2,17 @@ from typing import List
 import random
 import itertools
 import numpy as np
-from RNG_Simulation import play_RNG
+from rng_simulation import play_RNG
 
 
 def find_winning_player_liga(skill_levels: List[int]) -> int:
     """
-    simulate the game mode "LIGA" and return the winner.
+    simulate the game mode "LIGA" and return the winner
     """
 
     # the number of players equals to the length of existing skill levels
     players = list(range(len(skill_levels)))
-    # declares a list of integers that represents the ranks, every player starts with a score of zero
+    # declare a list of integers that represents the ranks, every player starts with a score of zero
     ranking = [0] * len(skill_levels)
     # in the following for loop, the list of players will shape to an two dimensional list
     # every element in players presents a pair of two

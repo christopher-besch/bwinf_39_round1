@@ -1,5 +1,5 @@
 import unittest
-from RNG_Simulation import play_RNG,play_RNG_5
+from rng_simulation import play_RNG,play_RNG_5
 
 class Test_play_RNG(unittest.TestCase):
     #testet Zufälligkeit der Operation random
