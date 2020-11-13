@@ -19,7 +19,7 @@ class Test_find_winning_player_Liga(unittest.TestCase):
     def test_find_winning_player(self):
         players = list(range(4))
         skill_levels=[1,2,3,4]
-        winning_player=find_winning_player_liga(players, skill_levels, test_best_player_wins)
+        winning_player=find_winning_player_liga(skill_levels, test_best_player_wins)
         self.assertAlmostEqual(winning_player,3)
 
 class Test_find_winning_player_KO(unittest.TestCase):

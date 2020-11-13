@@ -5,7 +5,7 @@ import numpy as np
 from rng_simulation import play_RNG
 
 
-def find_winning_player_liga(skill_levels: List[int]) -> int:
+def find_winning_player_liga(skill_levels: List[int], play_game = play_RNG) -> int:
     """
     simulate the game mode "LIGA" and return the winner
     """
@@ -14,12 +14,12 @@ def find_winning_player_liga(skill_levels: List[int]) -> int:
     players = list(range(len(skill_levels)))
     # declare a list of integers that represents the ranks, every player starts with a score of zero
     ranking = [0] * len(skill_levels)
-    # in the following for loop, the list of players will shape to an two dimensional list
+    # in the following for-loop, the list of players will shape to an two dimensional list
     # every element in players presents a pair of two
     for first_player, second_player in itertools.combinations(players, 2):
         # first_player and second_player play against each other
         # save the winner
-        winning_player = play_RNG(first_player, second_player, skill_levels)
+        winning_player = play_game(first_player, second_player, skill_levels)
         # counts the wins of the winner
         ranking[winning_player] = ranking[winning_player] + 1
     # find the player with most wins and return his number
