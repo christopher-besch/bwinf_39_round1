@@ -1,11 +1,9 @@
 from typing import List
-import random
 import itertools
-import numpy as np
 from rng_simulation import play_RNG
 
 
-def find_winning_player_liga(skill_levels: List[int], play_game = play_RNG) -> int:
+def find_winning_player_liga(skill_levels: List[int], play_game=play_RNG) -> int:
     """
     simulate the game mode "LIGA" and return the winner
     """

@@ -1,11 +1,10 @@
 import random
 from io_handler import read_skill_levels
-from find_winning_players import find_winning_player_liga, find_winning_player_KO
-from rng_simulation import play_RNG_5, play_RNG
 from victory_test import does_player_win
 import sys
 
-def get_input():
+
+def main():
     if len(sys.argv) < 2:
         # will return main method if arguments are missing
         print("Es werden noch Argumente benötigt :Dateipfad + Wiederholungen")

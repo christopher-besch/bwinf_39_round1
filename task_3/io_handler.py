@@ -12,6 +12,4 @@ def read_skill_levels(filepath) -> List[int]:
             # add the current skill level to our list of skill levels
             skill_levels.append(int(skill_level))
 
-
-
     return skill_levels
