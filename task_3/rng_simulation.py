@@ -4,7 +4,7 @@ from typing import List
 
 def play_RNG(player1: int, player2: int, skill_levels: List[int]) -> int:
     """
-    player1 and player2 plays RNG against each other
+    player1 and player2 play RNG against each other
     the skill level of a player determines the number of murmurs in the urn
     return the winner
 
