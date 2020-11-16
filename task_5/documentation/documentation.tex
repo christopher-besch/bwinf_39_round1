@@ -93,23 +93,20 @@
 \section{Lösungsidee}
 % Die Idee der Lösung sollte hieraus vollkommen ersichtlich werden, ohne dass auf die eigentliche Implementierung Bezug genommen wird.
 
-Der Eingangstext besteht aus unvollständigen Wörtern.
-Diese Wörter müssen mithilfe von Ersatzwörtern aus der Wörterbank ersetzt werden.
-
-Ein Ersatzwort kann ein Wort ersetzten, wenn
+Eingegeben werden Schüler und Pakete, die mit 1 anfangend durchnummeriert sind.
+Jeder Schüler hat drei Wünsche, die jeweils einem der gegebenen Pakete entsprechen.
+Nun ist es die Aufgabe des Programmes, die/eine optimale Anordnung der Pakete und Schüler zu finden.
+Die Ausführung dieser Aufgabe lässt sich in drei Subaufgaben einteilen:
 \begin{enumerate}
-    \item die Länge beider Wörter gleich ist und
-    \item jeder Buchstabe aus dem Ersatzwort mit dem gegenüberliegenden Buchstaben, der Buchstabe an gleicher Stelle aus dem Wort, übereinstimmt, oder der gegenüberliegende Buchstabe eine freie Stelle (\glqq \_\grqq{}) ist.
-    Eine freie Stelle stimmt quasi mit jedem Buchstaben überein (=Joker).
+    \item Eine Anordnung ist besser als eine andere, wenn mehr Schüler ihren ersten Wunsch bekommen haben, die anderen beiden Wünsche sind hierbei irrelevant.
+Zuerst können alle Pakete, die nur von einem Schüler am meisten (erster Wunsch)gewünscht werden, zugeteilt werden.
+Das Gleiche kann für die anderen Wünsche durchgeführt werde.
+(Jeder einzelne Wunsch wird im Folgenden \glqq aktueller Wunsch\grqq{} genannt.)
+Hierbei ist allerdings zu beachten, dass die Pakete, die von mindestens einem Schüler als ein wichtigerer Wunsch als der aktuelle gewählt wurden, ausgenommen werden müssen.
+Wenn nun ein Schüler einem Paket zugeteilt worden ist, überprüft das Programm, ob nun ein Paket, dass von den zugeteiltem Schüler als wichtigerer Wunsch gewählt wurde, nur noch von einem einzelnen Schüler gewünscht wird, ist dies der Fall, wird dieses Paket ebenfalls zugeordnet.
+Diese Überprüfung wird immer für alle Zuteilungen durchgeführt.
+    \item 
 \end{enumerate}
-Wenn ein Ersatzwort verwendet wurde, kann es nicht erneut für ein folgendes Wort benutzt werden.
-
-Die Aufgabe des Programmes ist es, zu erkennen, ob eine Lösung möglich ist und welches Wort mit welchem Ersatzwort zu ersetzten ist.
-
-Dafür werden für jedes Wort alle passenden Ersatzwörter gesucht.
-Wenn zu manchen Wörtern mehrere Ersatzwörter passen, gibt es mehrere Möglichkeiten, diese passenden Ersatzwörter auszuwählen.
-Einige dieser Möglichkeiten sind unmöglich, da sie ein und dasselbe Ersatzwort mehrmals verwenden.
-Es muss also eine Möglichkeit gefunden werden, die diese Regel nicht verletzt.
 
 \section{Umsetzung}
 % Hier wird kurz erläutert, wie die Lösungsidee im Programm tatsächlich umgesetzt wurde. Hier können auch Implementierungsdetails erwähnt werden.
