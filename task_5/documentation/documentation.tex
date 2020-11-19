@@ -91,6 +91,7 @@
 \vspace{0.5cm}
 
 \section{Lösungsidee}
+\label{sec:loe}
 % Die Idee der Lösung sollte hieraus vollkommen ersichtlich werden, ohne dass auf die eigentliche Implementierung Bezug genommen wird.
 
 Eingegeben werden Schüler und Pakete, die mit 1 anfangend durchnummeriert sind.
@@ -99,36 +100,34 @@ Nun ist es die Aufgabe des Programmes, die/eine optimale Anordnung der Pakete un
 Die Ausführung dieser Aufgabe lässt sich in drei Subaufgaben einteilen:
 \begin{enumerate}
     \item Eine Anordnung ist besser als eine andere, wenn mehr Schüler ihren ersten Wunsch bekommen haben, die anderen beiden Wünsche sind hierbei irrelevant.
-Zuerst können alle Pakete, die nur von einem Schüler am meisten (erster Wunsch)gewünscht werden, zugeteilt werden.
-Das Gleiche kann für die anderen Wünsche durchgeführt werde.
-(Jeder einzelne Wunsch wird im Folgenden \glqq aktueller Wunsch\grqq{} genannt.)
-Hierbei ist allerdings zu beachten, dass die Pakete, die von mindestens einem Schüler als ein wichtigerer Wunsch als der aktuelle gewählt wurden, ausgenommen werden müssen.
-Wenn nun ein Schüler einem Paket zugeteilt worden ist, überprüft das Programm, ob nun ein Paket, dass von den zugeteiltem Schüler als wichtigerer Wunsch gewählt wurde, nur noch von einem einzelnen Schüler gewünscht wird, ist dies der Fall, wird dieses Paket ebenfalls zugeordnet.
-Diese Überprüfung wird immer für alle Zuteilungen durchgeführt.
-    \item 
+    Zuerst können alle Pakete, die nur von einem Schüler am meisten (erster Wunsch) gewünscht werden, zugeteilt werden.
+    Das Gleiche kann für die anderen Wünsche durchgeführt werde.
+    (Jeder einzelne Wunsch wird im Folgenden \glqq aktueller Wunsch\grqq{} genannt.)
+    Hierbei ist allerdings zu beachten, dass die Pakete, die von mindestens einem Schüler als ein wichtigerer Wunsch als der aktuelle gewählt wurden, ausgenommen werden müssen.
+    Wenn nun ein Schüler einem Paket zugeteilt worden ist, überprüft das Programm, ob nun ein Paket, dass von den zugeteiltem Schüler als wichtigerer Wunsch gewählt wurde, nur noch von einem einzelnen Schüler gewünscht wird, ist dies der Fall, wird dieses Paket ebenfalls zugeordnet.
+    Diese Überprüfung wird immer für alle Zuteilungen durchgeführt.
+    \item Nun liegen nur noch Pakete vor, die von niemandem gewünscht werden, und solche, die von mehreren gewünscht werden.
+    Es werden alle Pakete, die von mehren Schülern gewünscht worden, durchgegangen. Hierbei werden erst alle ersten und danach alle unwichtigeren Wünsche untersucht.
+    Für alle diese Pakete wird willkürlich ein Wünscher, ein Schüler, der sich das Paket wünscht, ausgewählt.
+    \item Es bleiben ausschließlich Pakete übrig die von niemandem, der noch nicht zugeteilt wurde, gewünscht werden. Diese werden komplett willkürlich auf die verbleibenden Schüler verteilt.
 \end{enumerate}
 
 \section{Umsetzung}
 % Hier wird kurz erläutert, wie die Lösungsidee im Programm tatsächlich umgesetzt wurde. Hier können auch Implementierungsdetails erwähnt werden.
 
 Die Lösungsidee wird in Python implementiert.
-Zuerst wird das Rätsel aus der Datei gelesen.
-Hierbei werden die einzelnen Wörter im Text, der ersten Zeile in der Datei, voneinander getrennt.
-Die Nicht-Wörter vor den Wörtern, nach den Wörtern und zwischen den Wörtern werden ebenfalls für die finale Ausgabe gespeichert. 
-In einer while-Schleife wird in dem Text nach dem ersten Wort mithilfe einer Regular Expression gesucht.
-Nach jedem Treffer wird der Text gekürzt, sodass das nächste Wort gefunden werden kann.
+Zuerst werden die Pakete aus der Datei gelesen und in Student (sie enthalten die Nummer des Schülers und dessen Wünsche) und Package (sie enthalten die Nummer des Paketes und die Nummern aufgeschlüsselt nach der Wichtigkeit des Wünsche aller Schüler, die sich das Paket wünschen.) Objekte konvertiert.
+Es werden zwei Dictionaries verwendet, eins enthält alle Schüler Objekte und eins alle Schüler Objekte.
+Um die rohen Daten aus der Datei in diese beiden Dictionaries zu speichern wird die Funktion load\_students\_and\_packages verwendet.
 
-Nun wird mit der rekursiven Funktion \textbf{replace\_incomplete\_words} eine Lösung gesucht, sie nimmt einen Text und eine Wörterbank entgegen.
-
-Bei jeder Ausführung dieser Funktion werden alle möglichen Ersatzwörter für das erste Wort im Text gesucht.
-Für jedes mögliche Ersatzwort wird die Funktion erneut aufgerufen, hier wird die Rekursion deutlich.
-Dieser Ausführung wird allerdings nicht der ganze Text und die ganze Wörterbank gegeben, das erste Wort wird aus dem Text und das verwendete Ersatzwort aus der Wörterbank weggelassen.
-
-Wenn der Funktion ein leerer Text, ein Text ohne Wörter, gegeben wird, wird der Rekursionsanker getroffen, eine Lösung wurde gefunden.
-Da aus der Aufgabenstellung hervorgeht, dass es immer nur eine Lösung geben kann, wird die Suche abgebrochen, wenn die erste funktionierende Möglichkeit gefunden wurde.
-Die Funktion gibt den Text mit allen Ersatzwörtern in korrekter Reihenfolge zurück.
-
-Zum Schluss wird der finale Text mit allen Nicht-Wörtern ausgegeben.
+Diese Dictionaries werden in einem Selection Objekt gespeichert.
+Dieses Objekt enthält die in \autoref{sec:loe} beschriebenen Methoden, assign\_all\_cleanly, assign\_all\_uncleanly und assign\_all\_dirtily in der richtigen Anordnung.
+Zudem enthält es ein Dictionary (assigned\_students), dieses enthält die Zuordnungen der Schüler mit den Paketen.
+assigned\_students wird somit von den genannten Methoden angepasst.
+Die in \autoref{sec:loe} genannte Überprüfung wird mithilfe zweier rekursiver Methoden umgesetzt, assign\_package\_if\_possible und resolve\_after\_assignment.
+assign\_package\_if\_possible versucht ein Paket zuzuteilen, ohne einem Schüler dessen Wunsch zu nehmen, wenn dieser genauso wichtig oder wichtiger ist als der aktuelle.
+resolve\_after\_assignment führt die Überprüfung rekursiv aus, die Methode führt sich selber für alle wichtigeren Wünschen aus und führt assign\_package\_if\_possible aus, um ein Paket einem Schüler zuzuordnen.
+assign\_package\_if\_possible ruft wiederum resolve\_after\_assignment auf, um weitere Pakete zu überprüfen.
 
 \section{Beispiele}
 % Genügend Beispiele einbinden! Die Beispiele von der BwInf-Webseite sollten hier diskutiert werden, aber auch eigene Beispiele sind sehr gut – besonders wenn sie Spezialfälle abdecken. Aber bitte nicht 30 Seiten Programmausgabe hier einfügen!
