@@ -218,26 +218,13 @@ def load_students_and_packages(lines):
 
 def main():
     # load students and packages form file
-    lines = load_file("beispieldaten/wichteln7.txt")
+    lines = load_file("beispieldaten/my_wichteln2.txt")
     selection = load_students_and_packages(lines)
 
     # assign all packages and students
     selection.assign_all_cleanly()
     selection.assign_all_uncleanly()
     selection.assign_all_dirtily()
-
-    # print results
-    print("student number, [wishes], assigned package")
-    for student_number in selection.students:
-        # convert this student's wishes into a usable string
-        wishes = [str(wish) for wish in selection.students[student_number].wishes]
-        wishes_string = " & ".join(wishes)
-        # get the package that got assigned to this student
-        assigned_package = selection.assigned_students[student_number]
-
-        print(f"    {student_number} & {wishes_string} & {assigned_package} \\\\")
-
-    return
 
     # print results
     print("student number, [wishes], assigned package")

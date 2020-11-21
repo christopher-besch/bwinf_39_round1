@@ -5,9 +5,9 @@
 \usepackage[a4paper,margin=2.5cm,footskip=0.5cm]{geometry}
 
 % ToDo: add info
-\newcommand{\Aufgabe}{Aufgabe 1: Wörter aufräumen} % Aufgabennummer und Aufgabennamen angeben
-\newcommand{\TeamId}{?????} % Team-ID aus dem PMS angeben
-\newcommand{\TeamName}{?????}
+\newcommand{\Aufgabe}{Aufgabe 5: Wichteln} % Aufgabennummer und Aufgabennamen angeben
+\newcommand{\TeamId}{00301} % Team-ID aus dem PMS angeben
+\newcommand{\TeamName}{Java-Editor\_Haters}
 \newcommand{\Namen}{Katharina Libner, Christopher Besch}
  
 % header and footer
@@ -141,6 +141,8 @@ Im Code sind diese mit jeweils einem Kommentar genauer beschrieben.
 Nun wird das Programm mit allen Beispieldateien ausgeführt.
 
 \paragraph{wichteln1.txt}
+Dieses Beispiel zeigt dass, jedes Paket, das von jemandem als erster Wunsch gewählt wurde, einem dieser Wünscher zugeteilt wurde.
+Des weiteren lässt sich erkennen, dass viele Schüler ein stark gewünschtes Paket zugeteilt bekommen haben.
 \begin{longtable}[c]{c|c|c|c|c}
     Schüler & 1. Wunsch & 2. Wunsch & 3. Wunsch & Zugeteiltes Paket \\
     \hline
@@ -158,6 +160,7 @@ Nun wird das Programm mit allen Beispieldateien ausgeführt.
 \end{longtable}
 
 \paragraph{wichteln2.txt}
+Genau wie beim ersten Beispiel werden weder Pakete noch Schüler mehrfach zugeteilt.
 \begin{longtable}[c]{c|c|c|c|c}
     Schüler & 1. Wunsch & 2. Wunsch & 3. Wunsch & Zugeteiltes Paket \\
     \hline
@@ -175,6 +178,7 @@ Nun wird das Programm mit allen Beispieldateien ausgeführt.
 \end{longtable}
 
 \paragraph{wichteln3.txt}
+Hier lässt sich erkennen, dass das Programm auch mit deutlich mehr Schülern kein Problem aufweist.
 \begin{longtable}[c]{c|c|c|c|c}
     Schüler & 1. Wunsch & 2. Wunsch & 3. Wunsch & Zugeteiltes Paket \\
     \hline
@@ -212,6 +216,8 @@ Nun wird das Programm mit allen Beispieldateien ausgeführt.
 \end{longtable}
 
 \paragraph{wichteln4.txt}
+Genau wie bei den ersten Beispielen lässt sich erkennen, dass wenn mehrere Schüler sich das selbe Paket wünschen, oft der erste Schüler dieses Paket bekommt.
+Das liegt daran, dass assign\_all\_dirtily immer Schüler mit einer geringeren Nummer priorisieren.
 \begin{longtable}[c]{c|c|c|c|c}
     Schüler & 1. Wunsch & 2. Wunsch & 3. Wunsch & Zugeteiltes Paket \\
     \hline
@@ -249,6 +255,7 @@ Nun wird das Programm mit allen Beispieldateien ausgeführt.
 \end{longtable}
 
 \paragraph{wichteln5.txt}
+An diesem Beispiel kann nichts weiteres erkannt werden.
 \begin{longtable}[c]{c|c|c|c|c}
     Schüler & 1. Wunsch & 2. Wunsch & 3. Wunsch & Zugeteiltes Paket \\
     \hline
@@ -286,6 +293,8 @@ Nun wird das Programm mit allen Beispieldateien ausgeführt.
 \end{longtable}
 
 \paragraph{wichteln6.txt}
+Auch mit extrem großen Datensätzen weist das Programm kein Problem auf.
+Was hier nicht erkennbar wird ist die geringe Laufzeit des Programmes, trotz der vielen Schüler.
 \begin{longtable}[c]{c|c|c|c|c}
     Schüler & 1. Wunsch & 2. Wunsch & 3. Wunsch & Zugeteiltes Paket \\
     \hline
@@ -384,6 +393,7 @@ Nun wird das Programm mit allen Beispieldateien ausgeführt.
 
 
 \paragraph{wichteln7.txt}
+Hier lässt sich das Gleiche wie bei dem letzten Beispiel erkennen, kein Problem mit 1000 Schülern.
 \begin{longtable}[c]{c|c|c|c|c}
     Schüler & 1. Wunsch & 2. Wunsch & 3. Wunsch & Zugeteiltes Paket \\
     \hline
@@ -1389,5 +1399,28 @@ Nun wird das Programm mit allen Beispieldateien ausgeführt.
     999 & 343 & 663 & 421 & 1 \\
     1000 & 794 & 521 & 381 & 794
 \end{longtable}
+
+\paragraph{Eigenes Beispiel 1}
+An diesem selbst erstelltem Beispiel zeigt, dass das Programm mit mehr als drei Wünschen kein Problem aufweist.
+(Im Header werden nur die Nummern der Wünsche dargestellt.)
+\begin{longtable}[c]{c|c|c|c|c|c|c|c|c|c|c|c}
+    Schüler & 1. & 2. & 3. & 4. & 5. & 6. & 7. & 8. & 9. & 10. & Paket \\
+    \hline
+    \endhead
+    1 & 3 & 4 & 9 & 5 & 2 & 8 & 7 & 1 & 10 & 6 & 3 \\
+    2 & 10 & 7 & 5 & 3 & 2 & 6 & 9 & 4 & 8 & 1 & 10 \\
+    3 & 1 & 5 & 3 & 7 & 9 & 4 & 10 & 8 & 6 & 2 & 1 \\
+    4 & 6 & 9 & 4 & 10 & 8 & 2 & 5 & 3 & 7 & 1 & 8 \\
+    5 & 6 & 10 & 7 & 5 & 9 & 2 & 8 & 1 & 3 & 4 & 6 \\
+    6 & 6 & 5 & 3 & 2 & 4 & 9 & 7 & 1 & 8 & 10 & 2 \\
+    7 & 1 & 4 & 5 & 10 & 3 & 6 & 2 & 8 & 9 & 7 & 4 \\
+    8 & 9 & 5 & 7 & 10 & 2 & 8 & 1 & 3 & 6 & 4 & 9 \\
+    9 & 7 & 5 & 2 & 4 & 6 & 9 & 3 & 1 & 8 & 10 & 7 \\
+    10 & 5 & 4 & 9 & 8 & 10 & 6 & 1 & 7 & 2 & 3 & 5
+\end{longtable}
+
+\paragraph{Eigenes Beispiel 2}
+Auch 1000 Schülern, die jeweils 100 Wünsche haben, kann das Programm problemlos zuteilen.
+Hier wird das Ergebnis allerdings nicht abgedruckt, das es sich über zu viele Spalten ziehen würde.
 
 \end{document}
