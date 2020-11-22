@@ -12,10 +12,10 @@ def main():
         return
     # first sys argument is needed for the filepath of the skill levels
     # skill_levels = read_skill_levels(sys.argv[1])
-    skill_levels = read_skill_levels("Data/my_spielstaerken1.txt")
+    skill_levels = read_skill_levels("Data/my_spielstaerken4.txt")
     # second sys argument is needed for the number of repetitions
     # n = int(sys.argv[2])
-    n = 1000
+    n = 10000
     # declare counters for every win in game
     count_wins_liga = 0
     count_wins_ko = 0
