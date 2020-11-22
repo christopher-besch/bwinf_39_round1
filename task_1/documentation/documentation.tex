@@ -125,13 +125,13 @@ Nun wird mit der rekursiven Funktion \textbf{replace\_incomplete\_words} eine L�
 
 Bei jeder Ausführung dieser Funktion werden alle möglichen Ersatzwörter für das erste Wort im Text gesucht.
 Für jedes mögliche Ersatzwort wird die Funktion erneut aufgerufen, hier wird die Rekursion deutlich.
-Dieser Ausführung wird allerdings nicht der ganze Text und die ganze Wörterbank gegeben, das erste Wort wird aus dem Text und das verwendete Ersatzwort aus der Wörterbank weggelassen.
+Dieser erneuten Ausführung wird allerdings nicht der ganze Text und die ganze Wörterbank gegeben, das erste Wort wird aus dem Text und das verwendete Ersatzwort aus der Wörterbank weggelassen.
 
 Wenn der Funktion ein leerer Text, ein Text ohne Wörter, gegeben wird, wird der Rekursionsanker getroffen, eine Lösung wurde gefunden.
 Da aus der Aufgabenstellung hervorgeht, dass es immer nur eine Lösung geben kann, wird die Suche abgebrochen, wenn die erste funktionierende Möglichkeit gefunden wurde.
 Die Funktion gibt den Text mit allen Ersatzwörtern in korrekter Reihenfolge zurück.
 
-Zum Schluss wird der finale Text mit allen Nicht-Wörtern ausgegeben.
+Zum Schluss wird der finale Text zusammen mit allen Nicht-Wörtern ausgegeben.
 
 \section{Beispiele}
 % Genügend Beispiele einbinden! Die Beispiele von der BwInf-Webseite sollten hier diskutiert werden, aber auch eigene Beispiele sind sehr gut – besonders wenn sie Spezialfälle abdecken. Aber bitte nicht 30 Seiten Programmausgabe hier einfügen!
@@ -141,7 +141,7 @@ Nun wird das Programm mit allen Beispieldateien ausgeführt.
 \paragraph{raetsel0.txt}
 Es wird das Ergebnis \glqq oh je, was für eine arbeit!\grqq{} ausgegeben.
 
-Die Wörter wurden korrekt ersetzt und unter Verwendung der Nicht-Wörtern zu einem sinnvollem Satz zusammengefügt.
+Die Wörter wurden korrekt ersetzt und unter Verwendung der Nicht-Wörter zu einem sinnvollem Satz zusammengefügt.
 
 \paragraph{raetsel1.txt}
 Das Ergebnis ist \glqq Am Anfang wurde das Universum erschaffen.
@@ -163,10 +163,10 @@ Das Programm weist keine Probleme mit längeren Sätzen auf.
 \paragraph{Eigenes Beispiel 1 (my\_raetsel1.txt)}
 Die Beispieldatei sieht wie folgt aus:
 
-\begin{itemize}
+\textbf{\begin{itemize}
     \item[] !!!Das ...,,,,,ist,,,!!!!...! ein .,.,..,.tolles \_\_i\_\_iel!!!
     \item[] Beispiel
-\end{itemize}
+\end{itemize}}
 
 Mit dem Ergebnis \glqq !!!Das ...,,,,,ist,,,!!!!...! ein .,.,..,.tolles Beispiel!!!\grqq{}
 

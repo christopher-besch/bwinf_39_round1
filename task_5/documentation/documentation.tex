@@ -8,7 +8,7 @@
 \newcommand{\Aufgabe}{Aufgabe 5: Wichteln} % Aufgabennummer und Aufgabennamen angeben
 \newcommand{\TeamId}{00301} % Team-ID aus dem PMS angeben
 \newcommand{\TeamName}{Volatile Violets}
-\newcommand{\Namen}{Katharina Libner, Christopher Besch}
+\newcommand{\Namen}{Christopher Besch}
  
 % header and footer
 \usepackage{scrlayer-scrpage, lastpage}
@@ -104,36 +104,41 @@ Die Ausführung dieser Aufgabe lässt sich in drei Subaufgaben einteilen:
 \begin{enumerate}
     \item Eine Anordnung ist besser als eine andere, wenn mehr Schüler ihren ersten Wunsch bekommen haben, die anderen beiden Wünsche sind hierbei irrelevant.
     Zuerst können alle Pakete, die nur von einem Schüler am meisten (erster Wunsch) gewünscht werden, zugeteilt werden.
-    Das Gleiche kann für die anderen Wünsche durchgeführt werde.
+    Das Gleiche kann darauffolgend für die anderen Wünsche durchgeführt werde.
     (Jeder einzelne Wunsch wird im Folgenden \glqq aktueller Wunsch\grqq{} genannt.)
     Hierbei ist allerdings zu beachten, dass die Pakete, die von mindestens einem Schüler als ein wichtigerer Wunsch als der aktuelle gewählt wurden, ausgenommen werden müssen.
-    Wenn nun ein Schüler einem Paket zugeteilt worden ist, überprüft das Programm, ob nun ein Paket, dass von den zugeteiltem Schüler als wichtigerer Wunsch gewählt wurde, nur noch von einem einzelnen Schüler gewünscht wird, ist dies der Fall, wird dieses Paket ebenfalls zugeordnet.
+    Wenn nun ein Schüler einem Paket zugeteilt worden ist, überprüft das Programm, ob nun ein Paket, das von dem zugeteilten Schüler als wichtigerer Wunsch gewählt wurde, nur noch von einem einzelnen Schüler gewünscht wird.
+    Ist dies der Fall, wird dieses Paket ebenfalls zugeordnet.
     Diese Überprüfung wird immer für alle Zuteilungen durchgeführt.
     \item Nun liegen nur noch Pakete vor, die von niemandem gewünscht werden, und solche, die von mehreren gewünscht werden.
     Es werden alle Pakete, die von mehren Schülern gewünscht worden, durchgegangen. Hierbei werden erst alle ersten und danach alle unwichtigeren Wünsche untersucht.
     Für alle diese Pakete wird willkürlich ein Wünscher, ein Schüler, der sich das Paket wünscht, ausgewählt.
-    \item Es bleiben ausschließlich Pakete übrig die von niemandem, der noch nicht zugeteilt wurde, gewünscht werden. Diese werden komplett willkürlich auf die verbleibenden Schüler verteilt.
+    \item Es bleiben ausschließlich Pakete übrig, die von niemandem, der noch nicht zugeteilt wurde, gewünscht werden. Diese werden komplett willkürlich auf die verbleibenden Schüler verteilt.
 \end{enumerate}
 
 \section{Umsetzung}
 % Hier wird kurz erläutert, wie die Lösungsidee im Programm tatsächlich umgesetzt wurde. Hier können auch Implementierungsdetails erwähnt werden.
 
 Die Lösungsidee wird in Python implementiert.
-Zuerst werden die Pakete aus der Datei gelesen und in Student (sie enthalten die Nummer des Schülers und dessen Wünsche) und Package (sie enthalten die Nummer des Paketes und die Nummern aufgeschlüsselt nach der Wichtigkeit des Wünsche aller Schüler, die sich das Paket wünschen.) Objekte konvertiert.
-Es werden zwei Dictionaries verwendet, eins enthält alle Schüler Objekte und eins alle Schüler Objekte.
-Um die rohen Daten aus der Datei in diese beiden Dictionaries zu speichern wird die Funktion \textbf{load\_students\_and\_packages} verwendet.
+Zuerst werden die Pakete aus der Datei gelesen und in \textbf{Student} (sie enthalten die Nummer des Schülers und dessen Wünsche) und \textbf{Package} (sie enthalten die Nummer des Paketes und die Nummern der Wünscher, in Reihenfolge der Wichtigkeit.) Objekte konvertiert.
 
-Diese Dictionaries werden in einem Selection Objekt gespeichert.
-Dieses Objekt enthält die in \autoref{sec:loe} beschriebenen Methoden, \textbf{assign\_all\_cleanly}, \textbf{assign\_all\_uncleanly} und \textbf{assign\_all\_dirtily} in der gleichen Anordnung.
-Zudem enthält es ein Dictionary (\textbf{assigned\_students}), dieses enthält die Zuordnungen der Schüler mit den Paketen.
+Es werden zwei Dictionaries verwendet, eins enthält alle \textbf{Student}-Objekte, das andere alle \textbf{Package}-Objekte.
+Um die rohen Daten aus der Datei in diese beiden Dictionaries zu speichern, wird die Funktion \textbf{load\_students\_and\_packages} verwendet.
+
+Diese Dictionaries werden in einem \textbf{Selection}-Objekt gespeichert.
+Dieses Objekt enthält die in \autoref{sec:loe} beschriebenen Methoden \textbf{assign\_all\_cleanly}, \textbf{assign\_all\_uncleanly} und \textbf{assign\_all\_dirtily} in der gleichen Anordnung.
+Zudem enthält es ein Dictionary (\textbf{assigned\_students}), dieses enthält die Zuordnungen der Schüler zu den Paketen.
 \textbf{assigned\_students} wird somit von den genannten Methoden angepasst.
-Die in \autoref{sec:loe} genannte Überprüfung wird mithilfe zweier rekursiver Methoden umgesetzt, \textbf{assign\_package\_if\_possible} und \textbf{resolve\_after\_assignment}.
-\textbf{assign\_package\_if\_possible} versucht ein Paket zuzuteilen, ohne einem Schüler dessen Wunsch zu nehmen, wenn dieser genauso wichtig oder wichtiger ist als der aktuelle.
-\textbf{resolve\_after\_assignment} führt die Überprüfung rekursiv aus, die Methode führt sich selber für alle wichtigeren Wünschen aus und führt \textbf{assign\_package\_if\_possible} aus, um ein Paket einem Schüler zuzuordnen.
-\textbf{assign\_package\_if\_possible} ruft wiederum \textbf{resolve\_after\_assignment} auf, um weitere Pakete zu überprüfen.
 
-Zudem werden einige Hilfsmethoden verwendet, mit den selbsterklärenden Namen \textbf{get\_unassigned\_wishers}, \textbf{assign} und \textbf{assign\_packages}, die als Teil von \textbf{assign\_all\_cleanly} zu verstehen ist.
-Im Code sind diese mit jeweils einem Kommentar genauer beschrieben.
+Die in \autoref{sec:loe} genannte Überprüfung wird mit Hilfe von zwei rekursiven Methoden umgesetzt, \textbf{assign\_package\_if\_possible} und \textbf{resolve\_after\_assignment}:
+\begin{itemize}
+    \item \textbf{assign\_package\_if\_possible} versucht ein Paket zuzuteilen, ohne einem Schüler dessen Wunsch zu nehmen, wenn dieser genauso wichtig oder wichtiger ist als der Aktuelle.
+    \item \textbf{resolve\_after\_assignment} führt die Überprüfung rekursiv aus, die Methode führt sich selbst für alle wichtigeren Wünschen und \textbf{assign\_package\_if\_possible} aus, um ein Paket einem Schüler zuzuordnen.
+    \textbf{assign\_package\_if\_possible} ruft wiederum \textbf{resolve\_after\_assignment} auf, um weitere Pakete zu überprüfen.
+\end{itemize}
+
+Zudem werden einige Hilfsmethoden verwendet mit den selbsterklärenden Namen \textbf{get\_unassigned\_wishers}, \textbf{assign} und \textbf{assign\_packages}, die als Teil von \textbf{assign\_all\_cleanly} zu verstehen sind.
+Im Code sind diese mit Kommentaren genauer beschrieben.
 
 \section{Beispiele}
 % Genügend Beispiele einbinden! Die Beispiele von der BwInf-Webseite sollten hier diskutiert werden, aber auch eigene Beispiele sind sehr gut – besonders wenn sie Spezialfälle abdecken. Aber bitte nicht 30 Seiten Programmausgabe hier einfügen!
@@ -141,8 +146,8 @@ Im Code sind diese mit jeweils einem Kommentar genauer beschrieben.
 Nun wird das Programm mit allen Beispieldateien ausgeführt.
 
 \paragraph{wichteln1.txt}
-Dieses Beispiel zeigt dass, jedes Paket, das von jemandem als erster Wunsch gewählt wurde, einem dieser Wünscher zugeteilt wurde.
-Des weiteren lässt sich erkennen, dass viele Schüler ein stark gewünschtes Paket zugeteilt bekommen haben.
+Dieses Beispiel zeigt, dass jedes Paket, das von jemandem als erster Wunsch gewählt wurde, einem dieser Wünscher zugeteilt wurde.
+Des Weiteren lässt sich erkennen, dass viele Schüler ein stark gewünschtes Paket zugeteilt bekommen haben.
 \begin{longtable}[c]{c|c|c|c|c}
     Schüler & 1. Wunsch & 2. Wunsch & 3. Wunsch & Zugeteiltes Paket \\
     \hline
@@ -217,7 +222,7 @@ Hier lässt sich erkennen, dass das Programm auch mit deutlich mehr Schülern ke
 
 \paragraph{wichteln4.txt}
 Genau wie bei den ersten Beispielen lässt sich erkennen, dass wenn mehrere Schüler sich das selbe Paket wünschen, oft der erste Schüler dieses Paket bekommt.
-Das liegt daran, dass \textbf{assign\_all\_dirtily} immer Schüler mit einer geringeren Nummer priorisieren.
+Das liegt daran, dass \textbf{assign\_all\_dirtily} immer Schüler mit einer geringeren Nummer priorisiert.
 \begin{longtable}[c]{c|c|c|c|c}
     Schüler & 1. Wunsch & 2. Wunsch & 3. Wunsch & Zugeteiltes Paket \\
     \hline
@@ -255,7 +260,7 @@ Das liegt daran, dass \textbf{assign\_all\_dirtily} immer Schüler mit einer ger
 \end{longtable}
 
 \paragraph{wichteln5.txt}
-An diesem Beispiel kann nichts weiteres erkannt werden.
+An diesem Beispiel kann nichts Weiteres erkannt werden.
 \begin{longtable}[c]{c|c|c|c|c}
     Schüler & 1. Wunsch & 2. Wunsch & 3. Wunsch & Zugeteiltes Paket \\
     \hline
@@ -294,7 +299,8 @@ An diesem Beispiel kann nichts weiteres erkannt werden.
 
 \paragraph{wichteln6.txt}
 Auch mit extrem großen Datensätzen weist das Programm kein Problem auf.
-Was hier nicht erkennbar wird ist die geringe Laufzeit des Programmes, trotz der vielen Schüler.
+Was hier nicht erkennbar wird, ist die geringe Laufzeit des Programmes, trotz der vielen Schüler.
+Zudem erkennt man, dass in etwa jeder zweite Schüler seinen Erstwunsch bekommen hat.
 \begin{longtable}[c]{c|c|c|c|c}
     Schüler & 1. Wunsch & 2. Wunsch & 3. Wunsch & Zugeteiltes Paket \\
     \hline
@@ -1401,7 +1407,7 @@ Hier lässt sich das Gleiche wie bei dem letzten Beispiel erkennen, kein Problem
 \end{longtable}
 
 \paragraph{Eigenes Beispiel 1 (my\_wichteln1.txt)}
-An diesem selbst erstelltem Beispiel zeigt, dass das Programm mit mehr als drei Wünschen kein Problem aufweist.
+An diesem selbst erstellten Beispiel sieht man, dass das Programm mit mehr als drei Wünschen kein Problem aufweist.
 (Im Header werden nur die Nummern der Wünsche dargestellt.)
 \begin{longtable}[c]{c|c|c|c|c|c|c|c|c|c|c|c}
     Schüler & 1. & 2. & 3. & 4. & 5. & 6. & 7. & 8. & 9. & 10. & Paket \\
@@ -1420,7 +1426,7 @@ An diesem selbst erstelltem Beispiel zeigt, dass das Programm mit mehr als drei 
 \end{longtable}
 
 \paragraph{Eigenes Beispiel 2 (my\_wichteln2.txt)}
-Auch 1000 Schülern, die jeweils 100 Wünsche haben, kann das Programm problemlos zuteilen.
-Hier wird das Ergebnis allerdings nicht abgedruckt, das es sich über zu viele Spalten ziehen würde.
+Auch 1000 Schülern, die jeweils 100 Wünsche haben, kann das Programm problemlos und mit geringer Laufzeit zuteilen.
+Hier wird das Ergebnis allerdings nicht abgedruckt, da es sich über zu viele Spalten ziehen würde.
 
 \end{document}
