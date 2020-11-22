@@ -44,7 +44,7 @@ def find_winning_player_liga(skill_levels: List[int], play_game=play_rng) -> int
     return random.choice(best_player)
 
 
-def find_winning_player_ko(start_player: int, end_player: int, skill_levels, expected_best_player, play_game) -> int:
+def find_winning_player_ko_old(start_player: int, end_player: int, skill_levels, expected_best_player, play_game) -> int:
     """
     recursive function
     simulate the game mode "KO" or "KO5" and return the winner
@@ -62,6 +62,7 @@ def find_winning_player_ko(start_player: int, end_player: int, skill_levels, exp
     middle_player = (start_player + end_player) // 2
 
     # search the interval in which the expected best player takes place
+    # <- it's only important if the expected player wins, everyone else is unimportant
     if middle_player <= expected_best_player < end_player:
         # interval on the right
         right_player = find_winning_player_ko(middle_player, end_player, skill_levels, expected_best_player, play_game)
@@ -75,7 +76,28 @@ def find_winning_player_ko(start_player: int, end_player: int, skill_levels, exp
             return -1
         right_player = find_winning_player_ko(middle_player, end_player, skill_levels, expected_best_player, play_game)
     else:
-        # expected_best_player is not located in any interval
+        # expected_best_player is in neither interval
         left_player = find_winning_player_ko(start_player, middle_player, skill_levels, expected_best_player, play_game)
         right_player = find_winning_player_ko(middle_player, end_player, skill_levels, expected_best_player, play_game)
     return play_game(left_player, right_player, skill_levels)
+
+
+def find_winning_player_ko(start_player: int, end_player: int, skill_levels, expected_best_player, play_game) -> int:
+    """
+    recursive function
+    simulate the game mode "KO" or "KO5" and return the winner
+    start_player and end_player define an interval
+    start_player is located in the interval and marks the first player on the left
+    end_player isn't located in the interval and marks the limit on the right
+    """
+
+    # when the interval is consisting of only one player
+    if start_player == end_player - 1:
+        # base case
+        return start_player
+    middle_player = (start_player + end_player) // 2
+
+    left_finalist = find_winning_player_ko(start_player, middle_player, skill_levels, expected_best_player, play_game)
+    right_finalist = find_winning_player_ko(middle_player, end_player, skill_levels, expected_best_player, play_game)
+
+    return play_game(left_finalist, right_finalist, skill_levels)
