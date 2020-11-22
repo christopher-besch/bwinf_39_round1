@@ -1,4 +1,4 @@
-from find_winning_players import find_winning_player_liga, find_winning_player_KO
+from find_winning_players import find_winning_player_liga, find_winning_player_ko
 import unittest
 
 
@@ -32,21 +32,21 @@ class Test_find_winning_player_KO(unittest.TestCase):
         players = list(range(8))
         skill_levels = [1, 3, 8, 7, 4, 5, 2, 6]
         # übergebe die Interavalle : startplayer 0-Endplayer 8
-        winning_player = find_winning_player_KO(0, len(players), skill_levels, 2, test_best_player_wins)
+        winning_player = find_winning_player_ko(0, len(players), skill_levels, 2, test_best_player_wins)
         self.assertAlmostEqual(winning_player, 2)
 
     def test_2(self):
         # Best_Player hat Unglück!
         players = list(range(8))
         skill_levels = [1, 3, 8, 7, 4, 5, 2, 6]
-        winning_player = find_winning_player_KO(0, len(players), skill_levels, 2, test_best_player_fails)
+        winning_player = find_winning_player_ko(0, len(players), skill_levels, 2, test_best_player_fails)
         self.assertAlmostEqual(winning_player, -1)
 
     def test_3(self):
         # falscher Übergabe des expected_players
         players = list(range(8))
         skill_levels = [1, 3, 8, 7, 4, 5, 2, 6]
-        winning_player = find_winning_player_KO(0, len(players), skill_levels, 3, test_best_player_wins)
+        winning_player = find_winning_player_ko(0, len(players), skill_levels, 3, test_best_player_wins)
         self.assertAlmostEqual(winning_player, -1)
 
     def test_4(self):
@@ -54,4 +54,4 @@ class Test_find_winning_player_KO(unittest.TestCase):
         players = list(range(8))
         skill_levels = [1, 3, 8, 7, 4, 5, 2]
         with self.assertRaises(IndexError):
-            winning_player = find_winning_player_KO(0, len(players), skill_levels, 2, test_best_player_wins)
+            winning_player = find_winning_player_ko(0, len(players), skill_levels, 2, test_best_player_wins)

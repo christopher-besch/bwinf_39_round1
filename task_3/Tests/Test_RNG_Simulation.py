@@ -1,5 +1,5 @@
 import unittest
-from rng_simulation import play_RNG, play_RNG_5
+from rng_simulation import play_rng, play_rng_5
 
 
 class Test_play_RNG(unittest.TestCase):
@@ -13,10 +13,10 @@ class Test_play_RNG(unittest.TestCase):
         count_wins_player1 = 0
         count_wins_player2 = 0
         for _ in range(n):
-            winning_player = play_RNG(players[0], players[1], skill_levels)
+            winning_player = play_rng(players[0], players[1], skill_levels)
             if (winning_player == 0):
                 count_wins_player1 += 1
             else:
                 count_wins_player2 += 1
-        self.assertAlmostEqual(count_wins_player1 / n, average_player1, 1)
-        self.assertAlmostEqual(count_wins_player2 / n, average_player2, 1)
+        self.assertAlmostEqual(count_wins_player1 / n, average_player1, 2)
+        self.assertAlmostEqual(count_wins_player2 / n, average_player2, 2)

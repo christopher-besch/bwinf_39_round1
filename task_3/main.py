@@ -5,46 +5,44 @@ import sys
 
 
 def main():
-    if len(sys.argv) < 2:
+    # todo: test
+    if False and len(sys.argv) < 3:
         # will return main method if arguments are missing
         print("Es werden noch Argumente benötigt :Dateipfad + Wiederholungen")
         return
     # first sys argument is needed for the filepath of the skill levels
-    skill_levels = read_skill_levels(sys.argv[1])
+    # skill_levels = read_skill_levels(sys.argv[1])
+    skill_levels = read_skill_levels("Data/my_spielstaerken1.txt")
     # second sys argument is needed for the number of repetitions
-    n = int(sys.argv[2])
-    players = list(range(len(skill_levels)))
+    # n = int(sys.argv[2])
+    n = 10000
     # declare counters for every win in game
     count_wins_liga = 0
-    count_wins_KO = 0
-    count_wins_KO5 = 0
-    repetition = n
-    while repetition > 0:
-        repetition -= 1
+    count_wins_ko = 0
+    count_wins_ko5 = 0
+    for _ in range(n):
         # mix the skill levels randomly
         random.shuffle(skill_levels)
-        # If the best player wins, the specific counter will count
+        # If the best player wins, the specific counter will be increased
         if does_player_win("LIGA", skill_levels):
             count_wins_liga += 1
         if does_player_win("KO", skill_levels):
-            count_wins_KO += 1
+            count_wins_ko += 1
         if does_player_win("KO5", skill_levels):
-            count_wins_KO5 += 1
-    # the string best_game saves the game with most wins
-    best_game = ""
+            count_wins_ko5 += 1
+
     # compare the value of counters
     print("Wie oft hat der spielstärkste Spieler im Durschnitt gewonnen: ")
     print(f"LIGA:\t{count_wins_liga / n}")
-    print(f"KO:\t{count_wins_KO / n}")
-    print(f"KO5:\t{count_wins_KO5 / n}")
-    if count_wins_liga > count_wins_KO and count_wins_liga > count_wins_KO5:
-        best_game = "LIGA"
-    elif count_wins_KO > count_wins_KO5 and count_wins_KO > count_wins_liga:
-        best_game = "KO"
-    else:
-        best_game = "KO5"
+    print(f"KO:\t{count_wins_ko / n}")
+    print(f"KO5:\t{count_wins_ko5 / n}")
+    games = {
+        count_wins_liga: "LIGA",
+        count_wins_ko: "KO",
+        count_wins_ko5: "K05"
+    }
     # print the best game mode
-    print(f"Beste Spielvariante: {best_game}")
+    print(f"Beste Spielvariante: {games[max(games)]}")
 
 
 if __name__ == '__main__':
