@@ -7,7 +7,7 @@
 \contentsline {paragraph}{\nonumberline raetsel2.txt}{2}{paragraph*.7}%
 \contentsline {paragraph}{\nonumberline raetsel3.txt}{2}{paragraph*.9}%
 \contentsline {paragraph}{\nonumberline raetsel4.txt}{2}{paragraph*.11}%
-\contentsline {paragraph}{\nonumberline Eigenes Beispiel 1}{2}{paragraph*.13}%
-\contentsline {paragraph}{\nonumberline Eigenes Beispiel 2}{2}{paragraph*.15}%
-\contentsline {paragraph}{\nonumberline Eigenes Beispiel 3}{2}{paragraph*.17}%
+\contentsline {paragraph}{\nonumberline Eigenes Beispiel 1 (my\_raetsel1.txt)}{2}{paragraph*.13}%
+\contentsline {paragraph}{\nonumberline Eigenes Beispiel 2 (my\_raetsel2.txt)}{2}{paragraph*.15}%
+\contentsline {paragraph}{\nonumberline Eigenes Beispiel 3 (my\_raetsel3.txt)}{2}{paragraph*.17}%
 \contentsline {section}{\numberline {4}Quellcode}{3}{section.4}%

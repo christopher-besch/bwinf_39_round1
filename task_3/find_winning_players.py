@@ -7,7 +7,6 @@ def find_winning_player_liga(skill_levels: List[int], play_game=play_rng) -> int
     """
     simulate the game mode "LIGA" and return the winner
     """
-
     # the number of players equals to the length of existing skill levels
     players = list(range(len(skill_levels)))
     # declare a list of integers that represents the ranks, every player starts with a score of zero

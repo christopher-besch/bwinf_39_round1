@@ -4,10 +4,10 @@
 \contentsline {section}{\numberline {3}Beispiele}{2}{section.3}%
 \contentsline {paragraph}{\nonumberline wichteln1.txt}{2}{paragraph*.3}%
 \contentsline {paragraph}{\nonumberline wichteln2.txt}{2}{paragraph*.5}%
-\contentsline {paragraph}{\nonumberline wichteln3.txt}{2}{paragraph*.7}%
+\contentsline {paragraph}{\nonumberline wichteln3.txt}{3}{paragraph*.7}%
 \contentsline {paragraph}{\nonumberline wichteln4.txt}{3}{paragraph*.9}%
 \contentsline {paragraph}{\nonumberline wichteln5.txt}{4}{paragraph*.11}%
 \contentsline {paragraph}{\nonumberline wichteln6.txt}{4}{paragraph*.13}%
 \contentsline {paragraph}{\nonumberline wichteln7.txt}{6}{paragraph*.15}%
-\contentsline {paragraph}{\nonumberline Eigenes Beispiel 1}{24}{paragraph*.17}%
-\contentsline {paragraph}{\nonumberline Eigenes Beispiel 2}{24}{paragraph*.19}%
+\contentsline {paragraph}{\nonumberline Eigenes Beispiel 1 (my\_wichteln1.txt)}{24}{paragraph*.17}%
+\contentsline {paragraph}{\nonumberline Eigenes Beispiel 2 (my\_wichteln2.txt)}{24}{paragraph*.19}%

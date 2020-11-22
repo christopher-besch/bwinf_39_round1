@@ -6,12 +6,12 @@ import sys
 
 def main():
     if len(sys.argv) < 3:
-        # will return main method if arguments are missing
+        # will return if arguments are missing
         print("Es werden noch Argumente benötigt :Dateipfad + Wiederholungen")
         return
-    # first sys argument is needed for the filepath of the skill levels
+    # second sys argument is needed for the filepath of the skill levels
     skill_levels = read_skill_levels(sys.argv[1])
-    # second sys argument is needed for the number of repetitions
+    # third sys argument is needed for the number of repetitions
     n = int(sys.argv[2])
     # declare counters for every win in game
     count_wins_liga = 0
@@ -28,7 +28,7 @@ def main():
         if does_player_win("KO5", skill_levels):
             count_wins_ko5 += 1
 
-    # compare the value of counters
+    # compare the values of counters
     print("Wie oft hat der spielstärkste Spieler im Durschnitt gewonnen: ")
     print(f"LIGA:\t{count_wins_liga / n}")
     print(f"KO:\t{count_wins_ko / n}")
