@@ -7,7 +7,7 @@
 % ToDo: add info
 \newcommand{\Aufgabe}{Aufgabe 5: Wichteln} % Aufgabennummer und Aufgabennamen angeben
 \newcommand{\TeamId}{00301} % Team-ID aus dem PMS angeben
-\newcommand{\TeamName}{Java-Editor\_Haters}
+\newcommand{\TeamName}{Volatile Violets}
 \newcommand{\Namen}{Katharina Libner, Christopher Besch}
  
 % header and footer
@@ -121,18 +121,18 @@ Die Ausführung dieser Aufgabe lässt sich in drei Subaufgaben einteilen:
 Die Lösungsidee wird in Python implementiert.
 Zuerst werden die Pakete aus der Datei gelesen und in Student (sie enthalten die Nummer des Schülers und dessen Wünsche) und Package (sie enthalten die Nummer des Paketes und die Nummern aufgeschlüsselt nach der Wichtigkeit des Wünsche aller Schüler, die sich das Paket wünschen.) Objekte konvertiert.
 Es werden zwei Dictionaries verwendet, eins enthält alle Schüler Objekte und eins alle Schüler Objekte.
-Um die rohen Daten aus der Datei in diese beiden Dictionaries zu speichern wird die Funktion load\_students\_and\_packages verwendet.
+Um die rohen Daten aus der Datei in diese beiden Dictionaries zu speichern wird die Funktion \textbf{load\_students\_and\_packages} verwendet.
 
 Diese Dictionaries werden in einem Selection Objekt gespeichert.
-Dieses Objekt enthält die in \autoref{sec:loe} beschriebenen Methoden, assign\_all\_cleanly, assign\_all\_uncleanly und assign\_all\_dirtily in der richtigen Anordnung.
-Zudem enthält es ein Dictionary (assigned\_students), dieses enthält die Zuordnungen der Schüler mit den Paketen.
-assigned\_students wird somit von den genannten Methoden angepasst.
-Die in \autoref{sec:loe} genannte Überprüfung wird mithilfe zweier rekursiver Methoden umgesetzt, assign\_package\_if\_possible und resolve\_after\_assignment.
-assign\_package\_if\_possible versucht ein Paket zuzuteilen, ohne einem Schüler dessen Wunsch zu nehmen, wenn dieser genauso wichtig oder wichtiger ist als der aktuelle.
-resolve\_after\_assignment führt die Überprüfung rekursiv aus, die Methode führt sich selber für alle wichtigeren Wünschen aus und führt assign\_package\_if\_possible aus, um ein Paket einem Schüler zuzuordnen.
-assign\_package\_if\_possible ruft wiederum resolve\_after\_assignment auf, um weitere Pakete zu überprüfen.
+Dieses Objekt enthält die in \autoref{sec:loe} beschriebenen Methoden, \textbf{assign\_all\_cleanly}, \textbf{assign\_all\_uncleanly} und \textbf{assign\_all\_dirtily} in der gleichen Anordnung.
+Zudem enthält es ein Dictionary (\textbf{assigned\_students}), dieses enthält die Zuordnungen der Schüler mit den Paketen.
+\textbf{assigned\_students} wird somit von den genannten Methoden angepasst.
+Die in \autoref{sec:loe} genannte Überprüfung wird mithilfe zweier rekursiver Methoden umgesetzt, \textbf{assign\_package\_if\_possible} und \textbf{resolve\_after\_assignment}.
+\textbf{assign\_package\_if\_possible} versucht ein Paket zuzuteilen, ohne einem Schüler dessen Wunsch zu nehmen, wenn dieser genauso wichtig oder wichtiger ist als der aktuelle.
+\textbf{resolve\_after\_assignment} führt die Überprüfung rekursiv aus, die Methode führt sich selber für alle wichtigeren Wünschen aus und führt \textbf{assign\_package\_if\_possible} aus, um ein Paket einem Schüler zuzuordnen.
+\textbf{assign\_package\_if\_possible} ruft wiederum \textbf{resolve\_after\_assignment} auf, um weitere Pakete zu überprüfen.
 
-Zudem werden einige Hilfsmethoden verwendet, mit den selbsterklärenden Namen get\_unassigned\_wishers, assign und assign\_packages, die als Teil von assign\_all\_cleanly zu verstehen ist.
+Zudem werden einige Hilfsmethoden verwendet, mit den selbsterklärenden Namen \textbf{get\_unassigned\_wishers}, \textbf{assign} und \textbf{assign\_packages}, die als Teil von \textbf{assign\_all\_cleanly} zu verstehen ist.
 Im Code sind diese mit jeweils einem Kommentar genauer beschrieben.
 
 \section{Beispiele}
@@ -217,7 +217,7 @@ Hier lässt sich erkennen, dass das Programm auch mit deutlich mehr Schülern ke
 
 \paragraph{wichteln4.txt}
 Genau wie bei den ersten Beispielen lässt sich erkennen, dass wenn mehrere Schüler sich das selbe Paket wünschen, oft der erste Schüler dieses Paket bekommt.
-Das liegt daran, dass assign\_all\_dirtily immer Schüler mit einer geringeren Nummer priorisieren.
+Das liegt daran, dass \textbf{assign\_all\_dirtily} immer Schüler mit einer geringeren Nummer priorisieren.
 \begin{longtable}[c]{c|c|c|c|c}
     Schüler & 1. Wunsch & 2. Wunsch & 3. Wunsch & Zugeteiltes Paket \\
     \hline
@@ -1400,7 +1400,7 @@ Hier lässt sich das Gleiche wie bei dem letzten Beispiel erkennen, kein Problem
     1000 & 794 & 521 & 381 & 794
 \end{longtable}
 
-\paragraph{Eigenes Beispiel 1}
+\paragraph{Eigenes Beispiel 1 (my\_wichteln1.txt)}
 An diesem selbst erstelltem Beispiel zeigt, dass das Programm mit mehr als drei Wünschen kein Problem aufweist.
 (Im Header werden nur die Nummern der Wünsche dargestellt.)
 \begin{longtable}[c]{c|c|c|c|c|c|c|c|c|c|c|c}
@@ -1419,7 +1419,7 @@ An diesem selbst erstelltem Beispiel zeigt, dass das Programm mit mehr als drei 
     10 & 5 & 4 & 9 & 8 & 10 & 6 & 1 & 7 & 2 & 3 & 5
 \end{longtable}
 
-\paragraph{Eigenes Beispiel 2}
+\paragraph{Eigenes Beispiel 2 (my\_wichteln2.txt)}
 Auch 1000 Schülern, die jeweils 100 Wünsche haben, kann das Programm problemlos zuteilen.
 Hier wird das Ergebnis allerdings nicht abgedruckt, das es sich über zu viele Spalten ziehen würde.
 

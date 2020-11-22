@@ -1,4 +1,5 @@
 import re
+import sys
 
 
 class Student:
@@ -217,8 +218,10 @@ def load_students_and_packages(lines):
 
 
 def main():
+    if len(sys.argv) != 2:
+        raise ValueError("Specify filepath of the input file!")
     # load students and packages form file
-    lines = load_file("beispieldaten/my_wichteln2.txt")
+    lines = load_file(sys.argv[1])
     selection = load_students_and_packages(lines)
 
     # assign all packages and students

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.7) (preloaded format=pdflatex 2020.8.21)  21 NOV 2020 13:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.7) (preloaded format=pdflatex 2020.8.21)  22 NOV 2020 21:20
 entering extended mode
 **./documentation.tex
 (documentation.tex
@@ -683,9 +683,24 @@ File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
 ) [1
 
 {C:/Users/Stromel/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
-Overfull \hbox (18.22472pt too wide) in paragraph at lines 135--137
+Overfull \hbox (15.42235pt too wide) in paragraph at lines 126--134
+\T1/cmr/m/n/10 schnitt 1[][] be-schrie-be-nen Me-tho-den, \T1/cmr/bx/n/10 as-si
+gn_all_cleanly\T1/cmr/m/n/10 , \T1/cmr/bx/n/10 as-sign_all_uncleanly \T1/cmr/m/
+n/10 und \T1/cmr/bx/n/10 as-sign_all_dirtily
+ []
+
+
+Overfull \hbox (4.9085pt too wide) in paragraph at lines 126--134
+\T1/cmr/bx/n/10 as-sign_package_if_possible \T1/cmr/m/n/10 und \T1/cmr/bx/n/10 
+re-sol-ve_after_assignment\T1/cmr/m/n/10 . \T1/cmr/bx/n/10 as-sign_package_if_p
+ossible \T1/cmr/m/n/10 ver-
+ []
+
+
+Overfull \hbox (34.97618pt too wide) in paragraph at lines 135--137
 []\T1/cmr/m/n/10 Zudem wer-den ei-ni-ge Hilfs-me-tho-den ver-wen-det, mit den s
-elbst-er-klä-ren-den Na-men get_unassigned_wishers,
+elbst-er-klä-ren-den Na-men \T1/cmr/bx/n/10 get_unassigned_wishers\T1/cmr/m/n/1
+0 ,
  []
 
 [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17]
@@ -705,23 +720,24 @@ Package rerunfilecheck Info: File `documentation.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1426.
  ) 
 Here is how much of TeX's memory you used:
- 16692 strings out of 481212
- 311680 string characters out of 2915721
- 923824 words of memory out of 3000000
- 31986 multiletter control sequences out of 15000+200000
- 545871 words of font info for 55 fonts, out of 3000000 for 9000
+ 16694 strings out of 481212
+ 311702 string characters out of 2915721
+ 923822 words of memory out of 3000000
+ 31987 multiletter control sequences out of 15000+200000
+ 546647 words of font info for 56 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  47i,20n,75p,10628b,686s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Stromel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ec
-rm1200.pk> <C:\Users\Stromel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/d
-pi600\ecrm1000.pk> <C:\Users\Stromel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
-pen/ec/dpi600\ecsx1000.pk> <C:\Users\Stromel\AppData\Local\MiKTeX\fonts/pk/ljfo
-ur/jknappen/ec/dpi600\ecsx1440.pk> <C:\Users\Stromel\AppData\Local\MiKTeX\fonts
-/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk> <C:\Users\Stromel\AppData\Local\MiKT
-eX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk>
-Output written on documentation.pdf (24 pages, 168675 bytes).
+bx1000.pk> <C:\Users\Stromel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/d
+pi600\ecrm1200.pk> <C:\Users\Stromel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
+pen/ec/dpi600\ecrm1000.pk> <C:\Users\Stromel\AppData\Local\MiKTeX\fonts/pk/ljfo
+ur/jknappen/ec/dpi600\ecsx1000.pk> <C:\Users\Stromel\AppData\Local\MiKTeX\fonts
+/pk/ljfour/jknappen/ec/dpi600\ecsx1440.pk> <C:\Users\Stromel\AppData\Local\MiKT
+eX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk> <C:\Users\Stromel\AppData\Lo
+cal\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk>
+Output written on documentation.pdf (24 pages, 177381 bytes).
 PDF statistics:
- 429 PDF objects out of 1000 (max. 8388607)
+ 458 PDF objects out of 1000 (max. 8388607)
  58 named destinations out of 1000 (max. 500000)
  25 words of extra memory for PDF output out of 10000 (max. 10000000)
 
