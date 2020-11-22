@@ -7,8 +7,8 @@
 % ToDo: add info
 \newcommand{\Aufgabe}{Aufgabe 1: Wörter aufräumen} % Aufgabennummer und Aufgabennamen angeben
 \newcommand{\TeamId}{00301} % Team-ID aus dem PMS angeben
-\newcommand{\TeamName}{Java-Editor\_Haters}
-\newcommand{\Namen}{Katharina Libner, Christopher Besch}
+\newcommand{\TeamName}{Violent Violets}
+\newcommand{\Namen}{Christopher Besch}
  
 % header and footer
 \usepackage{scrlayer-scrpage, lastpage}
@@ -116,7 +116,7 @@ Es muss also eine Möglichkeit gefunden werden, die diese Regel nicht verletzt.
 
 Die Lösungsidee wird in Python implementiert.
 Zuerst wird das Rätsel aus der Datei gelesen.
-Hierbei werden die einzelnen Wörter im Text, der ersten Zeile in der Datei, voneinander getrennt.
+Hierbei werden die einzelnen Wörter im Text, der ersten Zeile in der Datei, voneinander getrennt (\textbf{cut\_words}).
 Die Nicht-Wörter vor den Wörtern, nach den Wörtern und zwischen den Wörtern werden ebenfalls für die finale Ausgabe gespeichert. 
 In einer while-Schleife wird in dem Text nach dem ersten Wort mithilfe einer Regular Expression gesucht.
 Nach jedem Treffer wird der Text gekürzt, sodass das nächste Wort gefunden werden kann.
@@ -152,13 +152,13 @@ Hier erkennt man, dass die Rekursion funktioniert, da das dritte Wort im Origina
 \paragraph{raetsel2.txt}
 \glqq Als Gregor Samsa eines Morgens aus unruhigen Träumen erwachte, fand er sich in seinem Bett zu einem ungeheueren Ungeziefer verwandelt.\grqq{}
 
-Hier erlangt man keine neuen Erkenntnisse über das Programm.
-
 \paragraph{raetsel3.txt}
 \glqq Informatik ist die Wissenschaft von der systematischen Darstellung, Speicherung, Verarbeitung und Übertragung von Informationen, besonders der automatischen Verarbeitung mit Digitalrechnern.\grqq{}
 
 \paragraph{raetsel4.txt}
 \glqq Opa Jürgen blättert in einer Zeitschrift aus der Apotheke und findet ein Rätsel. Es ist eine Liste von Wörtern gegeben, die in die richtige Reihenfolge gebracht werden sollen, so dass sie eine lustige Geschichte ergeben. Leerzeichen und Satzzeichen sowie einige Buchstaben sind schon vorgegeben.\grqq{}
+
+Das Programm weist keine Probleme mit längeren Sätzen auf.
 
 \paragraph{Eigenes Beispiel 1}
 Die Beispieldatei sieht wie folgt aus:

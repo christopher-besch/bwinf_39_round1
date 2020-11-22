@@ -1,4 +1,5 @@
-  import re
+import re
+import sys
 
 
 def load_file(filepath):
@@ -125,7 +126,9 @@ def replace_incomplete_words(words, word_bank):
 
 
 def main():
-    text, word_bank = load_file(input("Enter filepath: "))
+    if len(sys.argv) != 2:
+        raise ValueError("Specify filepath of the input file!")
+    text, word_bank = load_file(sys.argv[1])
     words, non_words = cut_words(text)
     words = replace_incomplete_words(words, word_bank)
 
