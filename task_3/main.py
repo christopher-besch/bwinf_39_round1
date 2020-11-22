@@ -5,17 +5,14 @@ import sys
 
 
 def main():
-    # todo: test
-    if False and len(sys.argv) < 3:
+    if len(sys.argv) < 3:
         # will return main method if arguments are missing
         print("Es werden noch Argumente benötigt :Dateipfad + Wiederholungen")
         return
     # first sys argument is needed for the filepath of the skill levels
-    # skill_levels = read_skill_levels(sys.argv[1])
-    skill_levels = read_skill_levels("Data/my_spielstaerken4.txt")
+    skill_levels = read_skill_levels(sys.argv[1])
     # second sys argument is needed for the number of repetitions
-    # n = int(sys.argv[2])
-    n = 10000
+    n = int(sys.argv[2])
     # declare counters for every win in game
     count_wins_liga = 0
     count_wins_ko = 0
