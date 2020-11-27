@@ -1,5 +1,5 @@
-# bwinf39
+# BWINF 39
 
-## Links
+Our solutions to the 39th BWINF, a German programming competition
 
-- [pms](https://pms.bwinf.de/app/PMS)
+[Those](Bundeswettbewerb39-Aufgabenblatt.pdf) are the tasks.
